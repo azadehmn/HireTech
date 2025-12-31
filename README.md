@@ -10,22 +10,6 @@
 
 ---
 
-## 📖 Table of Contents
-
-- [Technologies](#technologies)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-  - [Installation](#installation)
-  - [Development Server](#development-server)
-  - [Build & Production](#build--production)
-- [Lint & Formatting](#lint--formatting)
-- [Environment Variables](#environment-variables)
-- [Components & Icons](#components--icons)
-- [Contribution](#contribution)
-- [License](#license)
-
----
-
 ## 🛠 Technologies
 
 - [Nuxt 3](https://nuxt.com/) – Vue 3 framework for SSR/SSG
@@ -41,6 +25,7 @@
 
 ## 📂 Project Structure
 
+```
 src/
 ├─ components/ # Vue components (Header, Buttons, Icons, etc.)
 │ └─ icons/ # Reusable SVG icons
@@ -55,6 +40,7 @@ src/
 node_modules/ # Node dependencies
 dist/ # Production build output
 .env # Environment variables (ignored in git)
+```
 
 ---
 
