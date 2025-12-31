@@ -81,8 +81,6 @@ pnpm lint       # ESLint checks
 - [TypeScript](https://www.typescriptlang.org/) – Typed JavaScript
 - [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework
 - [ESLint](https://eslint.org/) – Linting & code style
-- [Prettier](https://prettier.io/) – Code formatting
-- [Day.js](https://day.js.org/) – Optional date utility library
 - Design Tokens for colors and font sizes
 
 ---
