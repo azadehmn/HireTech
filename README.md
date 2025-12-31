@@ -8,21 +8,6 @@
 
 > Nuxt 3 project with TypeScript, Tailwind CSS, ESLint, and reusable component-based architecture.
 
----
-
-## 🛠 Technologies
-
-- [Nuxt 3](https://nuxt.com/) – Vue 3 framework for SSR/SSG
-- [Vue 3](https://vuejs.org/) – Reactive frontend library
-- [TypeScript](https://www.typescriptlang.org/) – Typed JavaScript
-- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework
-- [ESLint](https://eslint.org/) – Linting & code style
-- [Prettier](https://prettier.io/) – Code formatting
-- [Day.js](https://day.js.org/) – Optional date utility library
-- Design Tokens for colors and font sizes
-
----
-
 ## 📂 Project Structure
 
 ```
@@ -66,3 +51,32 @@ pnpm build
 pnpm preview
 
 ```
+
+## Build & Production
+
+```
+
+pnpm build
+```
+
+# Preview production build locally
+
+```
+
+pnpm preview
+```
+
+---
+
+## 🛠 Technologies
+
+- [Nuxt 3](https://nuxt.com/) – Vue 3 framework for SSR/SSG
+- [Vue 3](https://vuejs.org/) – Reactive frontend library
+- [TypeScript](https://www.typescriptlang.org/) – Typed JavaScript
+- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework
+- [ESLint](https://eslint.org/) – Linting & code style
+- [Prettier](https://prettier.io/) – Code formatting
+- [Day.js](https://day.js.org/) – Optional date utility library
+- Design Tokens for colors and font sizes
+
+---
