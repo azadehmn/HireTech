@@ -14,8 +14,8 @@ const config: NuxtConfig = defineNuxtConfig({
   },
   components: [
     {
-      path: '~/components',
-      pathPrefix: false, // این خط مهمه تا subfolders بدون prefix هم شناخته بشن
+      path: "~/components",
+      pathPrefix: false,
     },
   ],
 });
