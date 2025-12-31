@@ -41,9 +41,11 @@ This project is licensed under the **MIT License** – see the [LICENSE](LICENSE
 # Install dependencies
 pnpm install
 
-# Start dev server
-pnpm dev
+```
 
+## Build & Production
+
+```
 # Build for production
 pnpm build
 
@@ -52,18 +54,22 @@ pnpm preview
 
 ```
 
-## Build & Production
+# Development Server
 
 ```
-
-pnpm build
+# Start dev server
+pnpm dev
 ```
 
-# Preview production build locally
+# 🔧 Lint
+
+Check code style and linting:
 
 ```
+# Check ESLint rules
+pnpm lint       # ESLint checks
 
-pnpm preview
+
 ```
 
 ---
