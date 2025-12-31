@@ -1,0 +1,42 @@
+{
+  "extends": "./.nuxt/tsconfig.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "jsxImportSource": "vue",
+    "noImplicitThis": true,
+    "strict": true,
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "verbatimModuleSyntax": false,
+    "resolvePackageJsonExports": false,
+    "types": ["@types/node"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "#app": [".nuxt/app"],
+      "#app/*": [".nuxt/app/*"],
+      "#imports": [".nuxt/imports"],
+      "#imports/*": [".nuxt/imports/*"]
+    }
+  },
+  "include": [
+    "src",
+    "types",
+    ".nuxt/nuxt.d.ts",
+    "index.d.ts",
+    "types/**/*.d.ts",
+    "nuxt.config.ts",
+    "plugins/**/*.ts",
+    "stores/**/*.ts",
+    "composables/**/*.ts",
+    "types/**/*.d.ts"
+  ],
+  "exclude": ["node_modules", "libs", "src/**/*.js"]
+}
