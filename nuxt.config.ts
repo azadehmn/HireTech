@@ -15,9 +15,17 @@ const config: NuxtConfig = defineNuxtConfig({
   components: [
     {
       path: "~/components",
-      pathPrefix: false,
+      pathPrefix: true,
+      ignore: ["icons"],
     },
   ],
+  imports: {
+    dirs: [
+      "composables",
+      "composables/*/index.{ts,js,mjs,mts}",
+      "composables/**",
+    ],
+  },
 });
 
 export default config;

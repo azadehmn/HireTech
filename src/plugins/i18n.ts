@@ -15,5 +15,5 @@ export default defineNuxtPlugin((nuxtApp: NuxtApp) => {
   });
 
   nuxtApp.vueApp.use(i18n);
-  nuxtApp.provide("t", i18n.global.t);
+  // nuxtApp.provide("t", i18n.global.t);
 });

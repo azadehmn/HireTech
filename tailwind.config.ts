@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 import { colors } from "./src/designToken/color";
 import { fontSize } from "./src/designToken/fontSize";
+import { spacing } from "./src/designToken/spacing";
 
 const config: Config = {
   content: [
@@ -13,6 +14,7 @@ const config: Config = {
     extend: {
       colors,
       fontSize,
+      spacing,
     },
   },
 };
