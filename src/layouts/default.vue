@@ -3,8 +3,8 @@
     <!-- TopBar -->
     <TopBarMain />
     <!-- Main content -->
-    <main class="flex-1">
-      <NuxtPage />
+    <main class="mt-[150px]">
+        <slot />
     </main>
   </div>
 </template>
