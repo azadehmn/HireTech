@@ -17,7 +17,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const size = computed(() => props.size ?? 24);
+const size = computed(() => props.size ?? 16);
 const icons = import.meta.glob("~/icons/*.vue", { eager: true });
 const iconComponent = import.meta.server
   ? null
