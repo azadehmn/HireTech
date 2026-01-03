@@ -1,6 +1,6 @@
 <template>
   <button
-    class="ht-button font-YekanBakh"
+    class="ht-button"
     :class="[
       `ht-button--${type}`,
       `ht-button--${size}`,
