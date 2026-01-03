@@ -2,11 +2,12 @@
   <header
     class="w-full bg-white fixed top-0 left-0 z-50 h-[120px] flex items-center px-[80px] shadow-md"
   >
-    <button
-      class="font-YekanBakhFaNum bg-red-500 text-white rounded-[16px] px-4 py-2 font-medium"
-    >
-      {{ $t("buttons.call") }}
-    </button>
+    <HtButton
+      type="primary"
+      size="lg"
+      :text="t('buttons.call')"
+      after-icon="call"
+    />
 
     <nav class="absolute left-1/2 -translate-x-1/2 flex gap-10">
       <div

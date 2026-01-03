@@ -1,0 +1,61 @@
+.ht-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+
+  &__icon {
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  &__label {
+    white-space: nowrap;
+  }
+
+  /* ===== Sizes ===== */
+  &--lg {
+    padding: 12px 26px;
+    font-size: 14px;
+  }
+
+  &--sm {
+    padding: 9px 18px;
+    font-size: 13px;
+  }
+
+  /* ===== Types ===== */
+
+  &--primary {
+    background-color: rgba(226, 0, 84, 1);
+    color: #ffffff;
+
+    &:hover {
+      background-color: rgba(200, 0, 75, 1);
+    }
+  }
+
+  &--secondary {
+    background-color: #0a2a51;
+    color: #ffffff;
+
+    &:hover {
+      background-color: #083060;
+    }
+  }
+
+  &--outline {
+    background-color: transparent;
+    border: 1.5px solid rgba(226, 0, 84, 1);
+    color: rgba(226, 0, 84, 1);
+
+    &:hover {
+      background-color: rgba(226, 0, 84, 0.08);
+    }
+  }
+}
