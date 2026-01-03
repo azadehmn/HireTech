@@ -1,16 +1,15 @@
 <template>
   <header
-    class="fixed top-0 left-0 z-50 w-full h-[120px] bg-white flex items-center justify-between px-6 shadow-md"
+    class="fixed top-0 left-0 z-50 w-full py-md bg-white flex items-center justify-between px-6 shadow-md rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[32px] rounded-br-[32px]
+"
   >
-    <button
-      class="border-border-red-500 text-white rounded-[16px] w-10 h-10 flex items-center justify-center"
-    >
-      <Icon name="phone" />
-    </button>
-
-    <button class="text-blue-900" @click="toggleMenu">
-      <Icon :name="isOpen ? 'close' : 'menu'" />
-    </button>
+    <HtButton type="outline" size="lg" after-icon="call" />
+    <HtButton
+      type="outline"
+      size="lg"
+      :after-icon="isOpen ? 'close' : 'menu'"
+      @click="toggleMenu"
+    />
   </header>
 
   <transition name="overlay">

@@ -1,7 +1,11 @@
 <template>
   <button
-    class="ht-button"
-    :class="[`ht-button--${type}`, `ht-button--${size}`]"
+    class="ht-button font-YekanBakh"
+    :class="[
+      `ht-button--${type}`,
+      `ht-button--${size}`,
+      !text ? 'ht-button--icon-only' : '',
+    ]"
     @click="$emit('click', $event)"
   >
     <!-- before icon -->
@@ -24,7 +28,6 @@
 </template>
 
 <script setup lang="ts">
-
 const props = defineProps<{
   type?: "primary" | "secondary" | "outline";
   size?: "lg" | "sm";

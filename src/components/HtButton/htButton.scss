@@ -1,17 +1,8 @@
 .ht-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  border-radius: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
-  transition: all 0.2s ease;
+  @apply inline-flex items-center border rounded-md justify-center gap-2 font-bold cursor-pointer border-none transition-all duration-200 ease-in-out;
 
   &__icon {
-    font-size: 16px;
-    line-height: 1;
+    @apply text-base leading-none; /* 16px */
   }
 
   &__label {
@@ -20,42 +11,28 @@
 
   /* ===== Sizes ===== */
   &--lg {
-    padding: 12px 26px;
-    font-size: 14px;
+    @apply px-[26px] py-[12px] text-[14px]; /* px از توکن پروژه 26px, py 12px */
   }
 
   &--sm {
-    padding: 9px 18px;
-    font-size: 13px;
+    @apply px-[18px] py-[9px] text-[13px];
   }
-
   /* ===== Types ===== */
-
   &--primary {
-    background-color: rgba(226, 0, 84, 1);
-    color: #ffffff;
-
-    &:hover {
-      background-color: rgba(200, 0, 75, 1);
-    }
+    @apply bg-[#E20054] text-white hover:bg-[#C8004B];
   }
 
   &--secondary {
-    background-color: #0a2a51;
-    color: #ffffff;
-
-    &:hover {
-      background-color: #083060;
-    }
+    @apply bg-[#0A2A51] text-white hover:bg-[#083060];
   }
 
   &--outline {
-    background-color: transparent;
-    border: 1.5px solid rgba(226, 0, 84, 1);
-    color: rgba(226, 0, 84, 1);
+    @apply bg-transparent text-[#E20054];
+    border: 1.5px solid #e20054;
+  }
 
-    &:hover {
-      background-color: rgba(226, 0, 84, 0.08);
-    }
+  /* ===== Icon only ===== */
+  &--icon-only {
+    @apply p-[12px] border rounded-[8px] w-auto h-auto;
   }
 }

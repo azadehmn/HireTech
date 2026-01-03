@@ -8,7 +8,6 @@
       :text="t('buttons.call')"
       after-icon="call"
     />
-
     <nav class="absolute left-1/2 -translate-x-1/2 flex gap-10">
       <div
         v-for="item in menuItems"

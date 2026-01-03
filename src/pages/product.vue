@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center p-10 mt-[100px]">
+  <div class="flex flex-col items-center justify-center p-10 mt-[40px]">
     <TopBarMain />
 
     <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 w-full max-w-4xl">
