@@ -4,11 +4,11 @@ import { Product } from "../types/product";
 export const useProducts = () => {
   const data = ref<Product[] | null>(null); // Use Product array or null
   const error = ref<string | null>(null); // Error state
-  const loading = ref<boolean>(false); // Loading state
+  const pending = ref<boolean>(false); // Loading state
 
   // Fetch ProductList
   const fetchData = async () => {
-    loading.value = true;
+    pending.value = true;
     error.value = null;
 
     try {
@@ -18,7 +18,7 @@ export const useProducts = () => {
     } catch (err) {
       error.value = "err";
     } finally {
-      loading.value = false;
+      pending.value = false;
     }
   };
 
@@ -29,5 +29,5 @@ export const useProducts = () => {
   // Initial fetch when the composable is used
   fetchData();
 
-  return { data, error, loading, refetch };
+  return { data, error, pending, refetch };
 };

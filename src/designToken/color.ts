@@ -11,4 +11,13 @@ export const colors = {
   blue: { 900: "#0A2A51" },
   red: { 200: "#F180A9", 500: "#E20054" },
   white: "#FFFFFF",
+  text: {
+    disabled: "#8C8C8C",
+  },
+  outline: {
+    disabled: "#F0F0F0",
+    hover:"#EDEDED",
+    text:"#2E2E38"
+
+  },
 };

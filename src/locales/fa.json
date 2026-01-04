@@ -5,16 +5,27 @@
     "faq": "سوالات متداول",
     "about": "تماس با ما"
   },
-  "buttons":{
-    "call":"تماس"
+  "buttons": {
+    "call": "تماس",
+    "search": "جستجو",
+    "viewDetails": "مشاهده جزئیات"
   },
-  "product":{
-    "detail":{
-      "technicalSpecifications":"مشخصات فنی",
-      "price":"قیمت",
-      "decsription":"توضیحات",
-      "category":"دسته بندی",
-      "rating":"رتبه"
+  "product": {
+    "detail": {
+      "technicalSpecifications": "مشخصات فنی",
+      "price": "قیمت",
+      "decsription": "توضیحات",
+      "category": "دسته بندی",
+      "rating": "رتبه"
+    },
+    "list": {},
+    "filter": {
+      "addToCart": "افزودن به سبد",
+      "category": "دسته‌بندی",
+      "healthAndBeauty": "سلامت و زیبایی",
+      "industrialTools": "ابزارآلات صنعتی",
+      "sort": "مرتب‌سازی"
+
     }
   }
 }

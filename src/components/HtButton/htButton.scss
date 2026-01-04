@@ -1,5 +1,5 @@
 .ht-button {
-  @apply inline-flex items-center border rounded-md justify-center gap-2 font-bold cursor-pointer border-none transition-all duration-200 ease-in-out;
+  @apply inline-flex items-center border  rounded-md justify-center gap-2 font-bold cursor-pointer border-none transition-all duration-200 ease-in-out;
 
   &__icon {
     @apply text-base leading-none; /* 16px */
@@ -23,7 +23,8 @@
   }
 
   &--secondary {
-    @apply bg-[#0A2A51] text-white hover:bg-[#083060];
+    @apply bg-white text-red-500 rounded-xl border disabled:text-text-disabled disabled:bg-outline-disabled hover:bg-outline-hover hover:text-outline-text;
+    border: 1.5px solid #e9edf5;
   }
 
   &--outline {
