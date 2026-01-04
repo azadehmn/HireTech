@@ -2,21 +2,41 @@
   <div class="grid items-start grid-cols-12 gap-md">
     <div class="col-span-full xl:col-span-3 max-h[400px]">
       <div class="flex flex-col gap-[12px]">
-        <div class="bg-white p-4 rounded-[16px] shadow-sm">
-          <Card class="w-full" :customBg="'rounded-xl'">
-            <template #header>
-              <p>sort</p>
-            </template>
-          </Card>
-        </div>
+        <!-- <div class="bg-white p-4 rounded-[16px] shadow-sm"> -->
+          <!-- <Card class="w-full" :customBg="'rounded-xl'">
+            <template #header> </template>
+          </Card> -->
+        <!-- </div> -->
 
-        <div class="bg-white p-4 rounded-[16px] shadow-sm">
-          <Card class="w-full" :customBg="'rounded-xl'">
-            <template #header>
-              <p>filter</p>
-            </template>
-          </Card>
-        </div>
+        <Card class="w-full" :customBg="'rounded-xl'">
+          <template #header>
+            <h2 class="font-medium mb-4 text-gray-700 text-body3 mb-md"> {{ $t("product.filter.category") }}</h2>
+            <div v-if="pending">
+              <CheckboxCustom
+                v-for="index in 3"
+                :key="index"
+                :loading="true"
+                label="loading text"
+                name="loading text"
+                class="my-sm"
+              />
+            </div>
+
+            <div
+              v-for="category in groupedByCategory"
+              :key="category.name"
+              v-else
+              class="flex gap-2 justify-between mb-sm"
+            >
+              <CheckboxCustom
+                :label="category.name"
+                :name="category.name"
+                v-model="selectedCategories[category.name]"
+              />
+              <p class="font-yekanFa text-white hover:bg-red-500 bg-black text-body2 w-[24px] py-[3px] text-center item-center rounded-md">{{ category.count }}</p>
+            </div>
+          </template>
+        </Card>
       </div>
     </div>
     <div
@@ -25,7 +45,7 @@
       <ProductLoading v-if="pending" />
       <Card
         v-else
-        v-for="product in data"
+        v-for="product in filteredProducts"
         :key="product.id"
         :customBg="'rounded-xl'"
         class="p-3 flex flex-col h-full"
@@ -62,4 +82,35 @@
 import { Product } from "../../types/product";
 const data = inject<Ref<Product[]>>("data", ref([]));
 const pending = inject<Ref<boolean>>("pending", ref(false));
+
+const filteredProducts = computed(() => {
+  const activeCategories = Object.keys(selectedCategories).filter(
+    (cat) => selectedCategories[cat]
+  );
+  if (activeCategories.length === 0) return data.value ?? [];
+  return (data.value ?? []).filter(
+    (p) => p.category && activeCategories.includes(p.category)
+  );
+});
+
+const groupedByCategory = computed(() => {
+  if (!data.value) return [];
+
+  const map: Record<string, { name: string; count: number }> = {};
+
+  data.value.forEach((product) => {
+    const category = product.category ?? "--";
+    if (!map[category]) map[category] = { name: category, count: 0 };
+    map[category].count += 1;
+  });
+
+  return Object.values(map);
+});
+const selectedCategories = reactive<Record<string, boolean>>({});
+
+watchEffect(() => {
+  groupedByCategory.value.forEach((cat) => {
+    if (!(cat.name in selectedCategories)) selectedCategories[cat.name] = false;
+  });
+});
 </script>

@@ -16,8 +16,18 @@ export const colors = {
   },
   outline: {
     disabled: "#F0F0F0",
-    hover:"#EDEDED",
-    text:"#2E2E38"
-
+    hover: "#EDEDED",
+    text: "#2E2E38",
   },
+  surface: {
+    DEFAULT: "#FFFFFF",
+    disabled: "#EFEFF0",
+    focus: "#F4F4F5",
+    heavy: "#D7D7DA",
+    hover: "#F7F7F8",
+  },
+  border: {
+    DEFAULT: '#DADBE1',      disabled: '#E6E6EA',
+
+  }
 };
