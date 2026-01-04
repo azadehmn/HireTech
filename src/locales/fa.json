@@ -7,5 +7,14 @@
   },
   "buttons":{
     "call":"تماس"
+  },
+  "product":{
+    "detail":{
+      "technicalSpecifications":"مشخصات فنی",
+      "price":"قیمت",
+      "decsription":"توضیحات",
+      "category":"دسته بندی",
+      "rating":"رتبه"
+    }
   }
 }

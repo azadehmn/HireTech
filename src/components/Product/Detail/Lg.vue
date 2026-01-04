@@ -1,14 +1,59 @@
 <template>
   <Card class="w-full">
     <template #header>
-      <Skeleton :loading="pending" :width="524" :height="30" class="mb-xl mt-md">
+      <Skeleton
+        :loading="pending"
+        :width="524"
+        :height="30"
+        class="mb-xl mt-md"
+      >
         <p class="font-bold text-lg text-blue-900 leading-[24px] mb-xl mt-md">
           {{ data?.title }}
         </p></Skeleton
       >
-      <Skeleton :loading="pending" :width="800" :height="200" class="mt-2xs mx-auto">
+      <Skeleton
+        :loading="pending"
+        :width="800"
+        :height="200"
+        class="mt-2xs mx-auto"
+      >
         <img :src="data?.image" class="m-auto rounded-2xl max-h-[300px]" alt=""
       /></Skeleton>
+    </template> </Card
+  ><Card class="w-full mt-xl mb-[68px]">
+    <template #header>
+      <p class="font-bold text-md text-blue-900 leading-[24px] mb-xl mt-md">
+        {{ $t("product.detail.technicalSpecifications") }}
+      </p>
+      <div class="p-4">
+        <div class="flex flex-col gap-3">
+          <div
+            v-for="(item, index) in productSpecifications"
+            :key="index"
+            class="flex"
+          >
+            <div
+              class="w-[172px] font-medium text-sm text-gray-600 bg-gray-25 p-4 rounded-tr-[16px] rounded-tl-[4px] rounded-bl-[4px] rounded-br-[16px] ml-md"
+            >
+              <span class="font-medium">{{ $t(item.specification) }}</span>
+            </div>
+            <div
+              class="flex-1 font-YekanBakhFaNum bg-gray-25 p-4 rounded-tr-[4px] rounded-tl-[16px] rounded-bl-[16px] rounded-br-[4px]"
+            >
+              <Skeleton
+                v-if="pending"
+                :width="524"
+                :height="30"
+                class="mb-xl mt-md"
+              ></Skeleton>
+              <span v-else>
+                <!-- Check if item.value exists, otherwise display '--' -->
+                {{ item.value || "--" }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </template>
   </Card>
 </template>
@@ -17,4 +62,35 @@ import { ProductDetail } from "../../../types/product";
 
 const data = inject<Ref<ProductDetail>>("data", ref({} as ProductDetail));
 const pending = inject<Ref<boolean>>("pending");
+// Initialize productSpecifications with default values
+const productSpecifications = ref([
+  { specification: "product.detail.price", value: "--" },
+  { specification: "product.detail.decsription", value: "--" },
+  { specification: "product.detail.category", value: "--" },
+  { specification: "product.detail.rating", value: "--" },
+]);
+
+// Watch for changes in data and update productSpecifications accordingly
+watchEffect(() => {
+  if (data.value) {
+    productSpecifications.value = [
+      {
+        specification: "product.detail.price",
+        value: data.value?.price + " تومان" || "--",
+      },
+      {
+        specification: "product.detail.decsription",
+        value: data.value?.description || "--",
+      },
+      {
+        specification: "product.detail.category",
+        value: data.value?.category || "--",
+      },
+      {
+        specification: "product.detail.rating",
+        value: data.value?.rating?.count || "--",
+      },
+    ];
+  }
+});
 </script>

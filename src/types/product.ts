@@ -7,8 +7,12 @@ export interface Product {
 }
 export interface ProductDetail {
   id: number;
-  title: string;
+  title: string|number;
   description: string;
+  category: string;
   image: string;
   price: number;
+  rating:{
+    count:string
+  }
 }
