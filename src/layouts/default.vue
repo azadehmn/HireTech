@@ -1,12 +1,10 @@
+<script setup lang="ts"></script>
 <template>
-  <div class="min-h-screen flex flex-col">
-    <!-- TopBar -->
+  <div class="flex flex-col min-h-screen">
     <TopBarMain />
-    <!-- Main content -->
-    <main class="mt-[150px]">
-        <slot />
+    <main class="flex-grow bg-surface-background mb-[68px]">
+      <slot />
     </main>
+    <CustomFooter />
   </div>
 </template>
-
-<script setup lang="ts"></script>

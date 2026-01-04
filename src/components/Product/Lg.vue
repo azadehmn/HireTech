@@ -46,7 +46,6 @@
               :src="product.image"
               class="mx-auto mb-3 rounded-2xl h-[150px]"
               alt=""
-              loading="lazy"
             />
             <div
               class="font-bold text-sm text-blue-900 leading-[24px] line-clamp-2 min-h-[48px]"

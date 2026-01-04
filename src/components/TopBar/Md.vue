@@ -22,7 +22,7 @@
   <transition name="drawer">
     <aside
       v-if="isOpen"
-      class="fixed left-0 right-0 z-50 h-full w-full bg-white text-right p-6"
+      class="fixed left-0 right-0 z-50 h-full w-full bg-white text-right p-6 top-[90px]"
     >
       <nav class="flex flex-col gap-6">
         <div
