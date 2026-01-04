@@ -6,4 +6,5 @@ export const borderRadius = {
   sm: "4px",
   xl: "16px",
   xs: "2px",
+  "2xl": "24px",
 };

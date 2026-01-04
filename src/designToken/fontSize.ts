@@ -1,6 +1,6 @@
 export const fontSize = {
-  body3: ["13px", { lineHeight: "24px" }],
+  body3: "13px",
   sm: "12px",
   md: "16px",
-  lg: "20px",
+  lg: "24px",
 };

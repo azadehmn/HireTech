@@ -6,24 +6,24 @@
       type="primary"
       size="lg"
       :text="t('buttons.call')"
-      after-icon="call"
+      before-icon="call"
     />
     <nav class="absolute left-1/2 -translate-x-1/2 flex gap-10">
       <div
         v-for="item in menuItems"
         :key="item.label"
         class="group flex items-center cursor-pointer"
-      >
+      > <Icon
+          :name="item.icon"
+          class="ml-2 text-sm text-blue-900 group-hover:text-red-500 transition-colors"
+        />
         <span
           class="text-sm whitespace-nowrap font-medium text-blue-900 group-hover:text-red-500 transition-colors"
         >
           {{ t(item.label) }}
         </span>
 
-        <Icon
-          :name="item.icon"
-          class="ml-2 text-sm text-blue-900 group-hover:text-red-500 transition-colors"
-        />
+       
       </div>
     </nav>
   </header>
