@@ -22,26 +22,16 @@
     <div
       class="col-span-full xl:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
     >
+      <ProductLoading v-if="pending" />
       <Card
+        v-else
         v-for="product in data"
         :key="product.id"
         :customBg="'rounded-xl'"
         class="p-3 flex flex-col h-full"
       >
         <template #header>
-          <div v-if="pending">
-            <Skeleton :width="220" :height="180" class="w-full mx-auto mb-3" />
-            <Skeleton :width="220" :height="30" class="w-full mb-3" />
-            <HtButton
-              type="secondary"
-              size="lg"
-              :text="$t('buttons.viewDetails')"
-              after-icon="ArrowLeft"
-              class="w-full"
-              :disabled="true"
-            />
-          </div>
-          <div v-else>
+          <div>
             <img
               :src="product.image"
               class="mx-auto mb-3 rounded-2xl h-[150px]"

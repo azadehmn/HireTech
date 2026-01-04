@@ -24,34 +24,41 @@
       class="fixed left-0 right-0 z-50 h-full w-full bg-white text-right p-6 top-[90px]"
     >
       <nav class="flex flex-col gap-6">
-        <div
+        <NuxtLink
           v-for="item in menuItems"
           :key="item.label"
           class="flex items-center gap-3 text-blue-900 hover:text-red-500 transition-colors cursor-pointer"
+          :to="item.to"
         >
-          <Icon :name="item.icon" />
-          <span class="text-base font-medium">
+          <Icon
+            :name="item.icon"
+            :class="route.path === item.to ? 'text-red-500' : ''"
+          />
+          <span
+            class="text-base font-medium"
+            :class="route.path === item.to ? 'text-red-500' : ''"
+          >
             {{ t(item.label) }}
           </span>
-        </div>
+        </NuxtLink>
       </nav>
     </aside>
   </transition>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-
 const { t } = useI18n();
+const route = useRoute();
+
 const isOpen = ref(false);
 const toggleMenu = () => {
   isOpen.value = !isOpen.value;
 };
 const menuItems = [
-  { icon: "product", label: "menu.products" },
-  { icon: "cup", label: "menu.consulting" },
-  { icon: "faq", label: "menu.faq" },
-  { icon: "call", label: "menu.about" },
+  { icon: "call", label: "menu.about", to: "/contactUs" },
+  { icon: "faq", label: "menu.faq", to: "/faq" },
+  { icon: "cup", label: "menu.consulting", to: "/consulting" },
+  { icon: "product", label: "menu.products", to: "/product" },
 ];
 </script>
 
