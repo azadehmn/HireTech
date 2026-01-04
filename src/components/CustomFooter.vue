@@ -7,7 +7,9 @@
         {{ $t("footer.workingHours") }}
       </div>
 
-      <div class="col-span-12 xl:col-span-2 lg:col-span-3 md:col-span-4 text-right">
+      <div
+        class="col-span-12 xl:col-span-2 lg:col-span-3 md:col-span-4 text-right"
+      >
         <h2 class="text-md leading-[24px] text-gray-900 font-bold mb-xl">
           {{ $t("footer.quickAccess") }}
         </h2>
@@ -22,7 +24,9 @@
         </ul>
       </div>
 
-      <div class="col-span-12 xl:col-span-2 lg:col-span-3 md:col-span-4 text-right">
+      <div
+        class="col-span-12 xl:col-span-2 lg:col-span-3 md:col-span-4 text-right"
+      >
         <h2 class="text-md leading-[24px] text-gray-900 font-bold mb-xl">
           {{ $t("footer.siteGuide") }}
         </h2>
@@ -37,7 +41,9 @@
         </ul>
       </div>
 
-      <div class="col-span-12 xl:col-span-2 lg:col-span-3 md:col-span-4 text-right item-end">
+      <div
+        class="col-span-12 xl:col-span-2 lg:col-span-3 md:col-span-4 text-right item-end"
+      >
         <h2 class="text-md leading-[24px] text-gray-900 font-bold mb-xl">
           {{ $t("footer.socialNetworks") }}
         </h2>
@@ -53,11 +59,11 @@
               target="_blank"
               class="flex items-center gap-2 hover:underline"
             >
-              <img
-                :src="item.src"
-                :alt="$t(item.name)"
-                class="w-[24px] h-[24px]"
+              <Icon
+                :name="item.iconName"
+                class="text-gray-500 w-[24px] h-[24px] hover:text-red-500"
               />
+
               <span>{{ $t(item.name) }}</span>
             </a>
           </li>
@@ -120,13 +126,13 @@ const columnTwoGroupOne = ref<{ name: string; link: string }[]>([
   { name: "footer.getConsultation", link: "#" },
   { name: "footer.feedback", link: "#" },
 ]);
-const columnThreeLinks = ref<{ name: string; link: string; src: string }[]>([
+const columnThreeLinks = ref<{ name: string; link: string; iconName: string }[]>([
   {
     name: "footer.instagram",
     link: "#",
-    src: "/img/instagram.svg",
+    iconName: "instagram",
   },
-  { name: "footer.linkedin", link: "#", src: "/img/linkedin.svg" },
-  { name: "footer.telegram", link: "#", src: "/img/telegram.svg" },
+  { name: "footer.linkedin", link: "#", iconName: "linkedin" },
+  { name: "footer.telegram", link: "#", iconName: "telegram" },
 ]);
 </script>
