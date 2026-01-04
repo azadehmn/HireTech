@@ -1,9 +1,9 @@
 <template>
   <div class="root">
-    <ProductDetailLg v-if="!lg" />
+    <ProductDetailLg  />
   </div>
 </template>
 
 <script setup lang="ts">
-const { lg } = useSize();
+// const { lg } = useSize();
 </script>
