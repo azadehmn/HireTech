@@ -1,8 +1,8 @@
 <script setup lang="ts"></script>
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div>
     <TopBarMain />
-    <main class="flex-grow bg-surface-background mb-[68px]">
+    <main class="flex-grow bg-surface-background mb-[68px] mt-[150px]">
       <slot />
     </main>
     <CustomFooter />

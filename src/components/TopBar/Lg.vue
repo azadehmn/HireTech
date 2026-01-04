@@ -36,6 +36,6 @@ const menuItems = [
   { icon: "call", label: "menu.about" },
   { icon: "faq", label: "menu.faq" },
   { icon: "cup", label: "menu.consulting" },
-  { icon: "teacher", label: "menu.products" },
+  { icon: "product", label: "menu.products" },
 ];
 </script>

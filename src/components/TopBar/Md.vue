@@ -49,7 +49,7 @@ const toggleMenu = () => {
   isOpen.value = !isOpen.value;
 };
 const menuItems = [
-  { icon: "teacher", label: "menu.products" },
+  { icon: "product", label: "menu.products" },
   { icon: "cup", label: "menu.consulting" },
   { icon: "faq", label: "menu.faq" },
   { icon: "call", label: "menu.about" },
