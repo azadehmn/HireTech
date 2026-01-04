@@ -1,15 +1,14 @@
 <template>
   <header
-    class="fixed top-0 left-0 z-50 w-full py-md bg-white flex items-center justify-between px-6 shadow-md rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[32px] rounded-br-[32px]
-"
+    class="fixed top-0 left-0 z-50 w-full py-md bg-white flex items-center justify-between px-6 shadow-md rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[32px] rounded-br-[32px]"
   >
-    <HtButton type="outline" size="lg" after-icon="call" />
     <HtButton
       type="outline"
       size="lg"
       :after-icon="isOpen ? 'close' : 'menu'"
       @click="toggleMenu"
     />
+    <HtButton type="outline" size="lg" after-icon="call" />
   </header>
 
   <transition name="overlay">
