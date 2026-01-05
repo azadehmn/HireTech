@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 const { data, error, pending, refetch } = useProducts();
+const route = useRoute();
 provide("data", data);
 provide("error", error);
 provide("pending", pending);

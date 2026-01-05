@@ -1,16 +1,12 @@
 <template>
   <div class="grid items-start grid-cols-12 gap-md">
-    <div class="col-span-full xl:col-span-3 max-h[400px]">
+    <div class="col-span-full xl:col-span-3 max-h-[400px]">
       <div class="flex flex-col gap-[12px]">
-        <!-- <div class="bg-white p-4 rounded-[16px] shadow-sm"> -->
-          <!-- <Card class="w-full" :customBg="'rounded-xl'">
-            <template #header> </template>
-          </Card> -->
-        <!-- </div> -->
-
         <Card class="w-full" :customBg="'rounded-xl'">
           <template #header>
-            <h2 class="font-medium mb-4 text-gray-700 text-body3 mb-md"> {{ $t("product.filter.category") }}</h2>
+            <h2 class="font-medium mb-4 text-gray-700 text-body3 mb-md">
+              {{ $t("product.filter.category") }}
+            </h2>
             <div v-if="pending">
               <CheckboxCustom
                 v-for="index in 3"
@@ -23,22 +19,32 @@
             </div>
 
             <div
+              v-else
               v-for="category in groupedByCategory"
               :key="category.name"
-              v-else
               class="flex gap-2 justify-between mb-sm"
             >
               <CheckboxCustom
                 :label="category.name"
                 :name="category.name"
                 v-model="selectedCategories[category.name]"
+                @change="updateUrl"
               />
-              <p class="font-yekanFa text-white hover:bg-red-500 bg-black text-body2 w-[24px] py-[3px] text-center item-center rounded-md">{{ category.count }}</p>
+              <p
+                :class="{
+                  'bg-black': !selectedCategories[category.name],
+                  'bg-red-500': selectedCategories[category.name],
+                }"
+                class="font-yekanFa text-white hover:bg-red-500 bg-black text-body2 w-[24px] py-[3px] text-center item-center rounded-md"
+              >
+                {{ category.count }}
+              </p>
             </div>
           </template>
         </Card>
       </div>
     </div>
+
     <div
       class="col-span-full xl:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
     >
@@ -79,9 +85,29 @@
 </template>
 
 <script setup lang="ts">
+import { reactive, computed, watch, watchEffect } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import { Product } from "../../types/product";
+
+const route = useRoute();
+const router = useRouter();
+
 const data = inject<Ref<Product[]>>("data", ref([]));
 const pending = inject<Ref<boolean>>("pending", ref(false));
+
+const selectedCategories = reactive<Record<string, boolean>>({});
+
+const groupedByCategory = computed(() => {
+  const map: Record<string, { name: string; count: number }> = {};
+
+  data.value?.forEach((product) => {
+    const category = product.category ?? "--";
+    if (!map[category]) map[category] = { name: category, count: 0 };
+    map[category].count += 1;
+  });
+
+  return Object.values(map);
+});
 
 const filteredProducts = computed(() => {
   const activeCategories = Object.keys(selectedCategories).filter(
@@ -93,24 +119,25 @@ const filteredProducts = computed(() => {
   );
 });
 
-const groupedByCategory = computed(() => {
-  if (!data.value) return [];
+const updateUrl = () => {
+  const activeCategories = Object.keys(selectedCategories).filter(
+    (cat) => selectedCategories[cat]
+  );
 
-  const map: Record<string, { name: string; count: number }> = {};
-
-  data.value.forEach((product) => {
-    const category = product.category ?? "--";
-    if (!map[category]) map[category] = { name: category, count: 0 };
-    map[category].count += 1;
+  router.push({
+    query: {
+      categories: activeCategories.length
+        ? activeCategories.join(",")
+        : undefined,
+    },
   });
-
-  return Object.values(map);
-});
-const selectedCategories = reactive<Record<string, boolean>>({});
+};
 
 watchEffect(() => {
+  const categoriesFromUrl = route.query.categories?.toString().split(",") ?? [];
+
   groupedByCategory.value.forEach((cat) => {
-    if (!(cat.name in selectedCategories)) selectedCategories[cat.name] = false;
+    selectedCategories[cat.name] = categoriesFromUrl.includes(cat.name);
   });
 });
 </script>

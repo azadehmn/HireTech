@@ -39,7 +39,7 @@ const route = useRoute();
 const menuItems = [
   { icon: "call", label: "menu.about", to: "/contactUs" },
   { icon: "faq", label: "menu.faq", to: "/faq" },
-  { icon: "cup", label: "menu.consulting", to: "/#" },
+  { icon: "cup", label: "menu.consulting", to: "/consulting" },
   { icon: "product", label: "menu.products", to: "/product" },
 ];
 </script>
