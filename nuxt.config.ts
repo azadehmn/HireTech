@@ -1,6 +1,35 @@
 import { defineNuxtConfig, NuxtConfig } from "nuxt/config";
 
 const config: NuxtConfig = defineNuxtConfig({
+  app: {
+    head: {
+      bodyAttrs: {
+        class: "font-yekanFa overflow-x-hidden",
+      },
+      htmlAttrs: {
+        lang: "fa",
+      },
+      link: [
+        { rel: "preconnect", href: "https://cdn.zarinpal.com" },
+        {
+          rel: "preload",
+          href: "https://cdn.zarinpal.com/assets/fonts/YekanBakhFaNum.woff2",
+          as: "font",
+          type: "font/woff2",
+          crossorigin: "anonymous",
+        },
+      ],
+      meta: [
+        { charset: "utf-8" },
+        {
+          name: "viewport",
+          content:
+            "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
+        },
+        { name: "msapplication-TileColor", content: "#da532c" },
+      ],
+    },
+  },
   devtools: { enabled: true },
   postcss: { plugins: { autoprefixer: {}, tailwindcss: {} } },
   srcDir: "./src",
@@ -24,6 +53,7 @@ const config: NuxtConfig = defineNuxtConfig({
       "composables",
       "composables/*/index.{ts,js,mjs,mts}",
       "composables/**",
+      "types",
     ],
   },
   nitro: {

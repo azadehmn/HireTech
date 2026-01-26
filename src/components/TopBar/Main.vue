@@ -2,7 +2,7 @@
 <template>
   <div class="root">
     <TopBarLg v-if="!lg" />
-    <TopBarMd v-if="lg" />
+    <TopBarMd v-else/>
   </div>
 </template>
 

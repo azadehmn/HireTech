@@ -28,6 +28,12 @@
     "search": "جستجو",
     "viewDetails": "مشاهده جزئیات"
   },
+  "errors": {
+    "404": "خطا",
+    "serverError": "خطای داخلی سرور، لطفاً بعداً تلاش کنید.",
+    "networkError": "خطا در اتصال به شبکه. اینترنت خود را چک کنید.",
+    "unexpectedError": "یک خطای غیرمنتظره رخ داده است."
+  },
   "product": {
     "detail": {
       "technicalSpecifications": "مشخصات فنی",

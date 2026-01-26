@@ -4,4 +4,5 @@ export const fontSize = {
   sm: "14px",
   md: "20px",
   lg: "24px",
+  xl: "28px",
 };

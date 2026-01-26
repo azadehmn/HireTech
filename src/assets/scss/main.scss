@@ -1,21 +1,27 @@
-
-@import url('https://cdn.zarinpal.com/assets/fonts/all.css');
+@import url("https://cdn.zarinpal.com/assets/fonts/all.css");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body{
-    background-color: rgba(233, 237, 245, 1);    overflow-x: hidden;
-    overscroll-behavior-y: none;direction: rtl;
+body {
+  background-color: rgba(233, 237, 245, 1);
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+  direction: rtl;
 }
 
-  .container {
-    @apply mx-auto max-w-screen-lg  2xl:max-w-screen-xl  2xl:px-2xl;
-  }
-  .container-lg {
-    @apply lg:mx-auto max-w-screen-lg mx-auto;
-  }
-  .container-xl {
-    @apply xl:mx-auto max-w-screen-xl px-md;
-  }
- 
+.container {
+  @apply mx-auto max-w-screen-lg  2xl:max-w-screen-xl  2xl:px-2xl;
+}
+.container-lg {
+  @apply lg:mx-auto max-w-screen-lg mx-auto;
+}
+.container-xl {
+  @apply xl:mx-auto max-w-screen-xl px-md;
+}
+
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

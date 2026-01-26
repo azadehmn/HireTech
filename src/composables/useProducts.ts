@@ -1,11 +1,18 @@
-import { Product } from "../types/product";
-
 export const useProducts = () => {
   const data = ref<Product[] | null>(null);
   const error = ref<string | null>(null);
+  const config = useRuntimeConfig();
   const pending = ref<boolean>(false);
   const route = useRoute();
-
+  const { errorHandler } = useErrorHandler();
+  const errorMessage = ref<string | null>(null);
+  watch(error, (newError) => {
+    if (newError) {
+      errorMessage.value = errorHandler(newError);
+    } else {
+      errorMessage.value = null;
+    }
+  });
   const fetchData = async () => {
     pending.value = true;
     error.value = null;
@@ -21,13 +28,14 @@ export const useProducts = () => {
       const queryString = new URLSearchParams(
         queryParams as Record<string, string>
       ).toString();
-      const url = `https://fakestoreapi.com/products?${queryString}`;
 
-      const response = await fetch(url);
+      const response = await fetch(
+        `${config.public.apiBase}/products?${queryString}`
+      );
       const result: Product[] = await response.json();
       data.value = result;
-    } catch (err) {
-      error.value = "Error fetching products";
+    } catch (err:any) {
+      error.value = err;
     } finally {
       pending.value = false;
     }
