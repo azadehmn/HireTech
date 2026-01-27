@@ -60,7 +60,7 @@ const config: NuxtConfig = defineNuxtConfig({
     devProxy: {
       "/api": {
         target: process.env.NUXT_PUBLIC_API_BASE,
-        changeOrigin: true,
+        changeOrigin: false,
       },
     },
   },
