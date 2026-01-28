@@ -67,7 +67,7 @@
     <div
       class="col-span-full xl:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
     >
-      <Card class="col-span-full">
+      <Card class="xl:col-span-9 col-span-full ">
         <template #header>
           <div class="flex items-start">
             <p class="xl:w-1/4 w-full">
