@@ -71,7 +71,17 @@ pnpm lint       # ESLint checks
 
 
 ```
+# 🧪 Testing
+```
+# Run unit tests once
+pnpm test
 
+# Run tests in watch mode
+pnpm test:watch
+
+# Open Vitest UI in browser
+pnpm test:ui
+```
 ---
 
 ## 🛠 Technologies
