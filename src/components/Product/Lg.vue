@@ -1,13 +1,32 @@
 <template>
   <div class="grid items-start grid-cols-12 gap-md">
-    <div class="col-span-full xl:col-span-3 max-h-[400px]">
+    <div class="col-span-full xl:col-span-3 max-h-[400px] mb-xl">
       <div class="flex flex-col gap-[12px]">
+        <Card class="w-full mb-md" :customBg="'rounded-xl'">
+          <template #header>
+            <div class="mb-md">
+              <input
+                type="text"
+                v-model="searchTerm"
+                placeholder="جستجو ..."
+                class="w-full p-2 border rounded-md mb-md"
+              />
+              <HtButton
+                type="primary"
+                size="lg"
+                :text="$t('buttons.search')"
+                class="w-full"
+              />
+            </div>
+          </template>
+        </Card>
+
         <Card class="w-full" :customBg="'rounded-xl'">
           <template #header>
             <h2 class="font-medium mb-4 text-gray-700 text-body3 mb-md">
               {{ $t("product.filter.category") }}
             </h2>
-            <div v-if="pending">
+            <div v-if="pending || searchPending">
               <CheckboxCustom
                 v-for="index in 3"
                 :key="index"
@@ -48,14 +67,67 @@
     <div
       class="col-span-full xl:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
     >
-      <ProductLoading v-if="pending" />
+      <Card class="col-span-full">
+        <template #header>
+          <div class="flex items-start">
+            <p class="xl:w-1/4 w-full">
+              {{ $t("product.filter.selectedfiterItem") }}
+            </p>
+            <div
+              v-if="pending || searchPending"
+              class="flex flex-wrap gap-2 ms-auto justify-end"
+            >
+              <Skeleton
+                v-for="i in 2"
+                :key="i"
+                :loading="true"
+                :width="126"
+                :height="35"
+                class="mx-xs ms-auto"
+              />
+            </div>
 
+            <div v-else class="flex flex-wrap gap-2 ms-auto justify-end">
+              <!-- search button -->
+              <HtButton
+                v-if="searchTerm"
+                type="info"
+                size="lg"
+                :text="searchTerm"
+                after-icon="Close"
+                befor-icon="Search"
+                :afterIconProps="{ onClick: clearSearch }"
+              />
+
+              <!-- category buttons -->
+              <HtButton
+                v-for="categoryName in selectedCategoryNames"
+                :key="categoryName"
+                type="info"
+                size="lg"
+                :text="categoryName"
+                after-icon="Close"
+                :afterIconProps="{ onClick: () => clearCategory(categoryName) }"
+              />
+            </div>
+          </div>
+        </template>
+      </Card>
+      <ProductLoading v-if="pending || searchPending" />
+      <!-- Result  from Response Api  -->
+      <!-- <Card
+        v-else
+        v-for="product in data"
+        :key="product.id"
+        :customBg="'rounded-xl'"
+        class="p-3 flex flex-col h-full"
+      > -->
+      <!-- Result  from filter by localdata -->
       <Card
         v-else
         v-for="product in filteredProducts"
         :key="product.id"
         :customBg="'rounded-xl'"
-        class="p-3 flex flex-col h-full"
       >
         <template #header>
           <div>
@@ -92,7 +164,8 @@ import { Product } from "../../types/product";
 
 const route = useRoute();
 const router = useRouter();
-
+const searchTerm = ref("");
+const searchPending = ref(false);
 const data = inject<Ref<Product[]>>("data", ref([]));
 const pending = inject<Ref<boolean>>("pending", ref(false));
 
@@ -114,10 +187,17 @@ const filteredProducts = computed(() => {
   const activeCategories = Object.keys(selectedCategories).filter(
     (cat) => selectedCategories[cat]
   );
-  if (activeCategories.length === 0) return data.value ?? [];
-  return (data.value ?? []).filter(
-    (p) => p.category && activeCategories.includes(p.category)
+
+  let products = (data.value ?? []).filter(
+    (p) =>
+      !activeCategories.length || activeCategories.includes(p.category ?? "--")
   );
+
+  if (searchTerm.value.trim()) {
+    const term = searchTerm.value.trim().toLowerCase();
+    products = products.filter((p) => p.title.toLowerCase().includes(term));
+  }
+  return products;
 });
 
 const updateUrl = () => {
@@ -134,11 +214,58 @@ const updateUrl = () => {
   });
 };
 
+function useDebounce(fn: Function, delay: number) {
+  let timeout: ReturnType<typeof setTimeout>;
+
+  return (...args: any[]) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn(...args), delay);
+  };
+}
+
+const updateSearch = useDebounce(() => {
+  searchPending.value = false;
+  const query: any = { ...route.query };
+  query.search = searchTerm.value || undefined;
+  router.push({ query });
+}, 700);
+const clearSearch = () => {
+  searchTerm.value = "";
+  searchPending.value = false;
+  updateSearch();
+};
+
+const selectedCategoryNames = computed(() => {
+  return Object.keys(selectedCategories)
+    .filter((cat) => selectedCategories[cat])
+    .map((cat) => cat);
+});
+
+const clearCategory = (categoryName: string) => {
+  selectedCategories[categoryName] = false;
+  updateUrl();
+};
+
+/* ------------------ state → URL ------------------ */
+
+watch(searchTerm, () => {
+  searchPending.value = true;
+  updateSearch();
+});
+watch(
+  () => route.query.search,
+  (search) => {
+    searchTerm.value = typeof search === "string" ? search : "";
+  },
+  { immediate: true }
+);
+
+// categories
 watchEffect(() => {
-  const categoriesFromUrl = route.query.categories?.toString().split(",") ?? [];
+  const fromUrl = route.query.categories?.toString().split(",") ?? [];
 
   groupedByCategory.value.forEach((cat) => {
-    selectedCategories[cat.name] = categoriesFromUrl.includes(cat.name);
+    selectedCategories[cat.name] = fromUrl.includes(cat.name);
   });
 });
 </script>

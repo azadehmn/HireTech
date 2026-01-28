@@ -44,6 +44,7 @@
     },
     "list": {},
     "filter": {
+      "selectedfiterItem":"فیلترهای اعمال شده",
       "addToCart": "افزودن به سبد",
       "category": "دسته‌بندی",
       "healthAndBeauty": "سلامت و زیبایی",

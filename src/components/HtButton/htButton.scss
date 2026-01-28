@@ -31,6 +31,9 @@
     @apply bg-transparent text-[#E20054];
     border: 1.5px solid #e20054;
   }
+  &--info {
+    @apply bg-red-50 text-blue-900;
+  }
 
   /* ===== Icon only ===== */
   &--icon-only {

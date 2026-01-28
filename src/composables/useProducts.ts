@@ -6,6 +6,7 @@ export const useProducts = () => {
   const route = useRoute();
   const { errorHandler } = useErrorHandler();
   const errorMessage = ref<string | null>(null);
+  let abortController: AbortController | null = null;
   watch(error, (newError) => {
     if (newError) {
       errorMessage.value = errorHandler(newError);
@@ -16,6 +17,10 @@ export const useProducts = () => {
   const fetchData = async () => {
     pending.value = true;
     error.value = null;
+    if (abortController) {
+      abortController.abort();
+    }
+    abortController = new AbortController();
 
     try {
       const queryParams = { ...route.query };
@@ -30,13 +35,20 @@ export const useProducts = () => {
       ).toString();
 
       const response = await fetch(
-        `${config.public.apiBase}/products?${queryString}`
+        `${config.public.apiBase}/products?${queryString}`,
+        {
+          signal: abortController.signal,
+        }
       );
       const result: Product[] = await response.json();
       data.value = result;
     } catch (err:any) {
-      error.value = err;
-    } finally {
+      if (err.name === "AbortError") {
+        console.log("Request was aborted");
+      } else {
+        error.value = err;
+      }
+    }finally {
       pending.value = false;
     }
   };

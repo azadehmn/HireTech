@@ -11,7 +11,7 @@ export const colors = {
   },
   loadingBg:"E6E6EA",
   blue: { 900: "#0A2A51" },
-  red: { 200: "#F180A9", 500: "#E20054" },
+  red: { 200: "#F180A9", 500: "#E20054",50:"#FCE5EE" },
   white: "#FFFFFF",
   text: {
     disabled: "#8C8C8C",

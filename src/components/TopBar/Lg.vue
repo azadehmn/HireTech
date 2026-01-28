@@ -7,7 +7,7 @@
       type="primary"
       size="lg"
       :text="t('buttons.call')"
-      before-icon="call"
+      befor-icon="call"
     />
     <nav class="absolute left-1/2 -translate-x-1/2 flex gap-10">
       <NuxtLink

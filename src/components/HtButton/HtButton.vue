@@ -10,17 +10,19 @@
   >
     <!-- before icon -->
     <Icon
-      v-if="beforeIcon"
-      :name="beforeIcon"
+      v-if="beforIcon"
+      v-bind="beforIconProps"
+      :name="beforIcon"
       class="ht-button__icon ht-button__icon--before"
     />
     <!-- icon only -->
-    <Icon v-if="icon" :name="icon" class="ht-button__icon" />
+    <Icon v-if="icon" v-bind="iconProps" :name="icon" class="ht-button__icon" />
     <!-- text -->
     <span v-if="text" class="ht-button__label">{{ text }}</span>
     <!-- after icon -->
     <Icon
       v-if="afterIcon"
+      v-bind="afterIconProps"
       :name="afterIcon"
       class="ht-button__icon ht-button__icon--after"
     />
@@ -29,12 +31,15 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  type?: "primary" | "secondary" | "outline";
+  type?: "primary" | "secondary" | "outline" | "info";
   size?: "lg" | "sm";
-  beforeIcon?: string;
+  beforIcon?: string;
   icon?: string;
   afterIcon?: string;
   text?: string;
+  beforIconProps?: Record<string, any>;
+  iconProps?: Record<string, any>;
+  afterIconProps?: Record<string, any>;
 }>();
 
 defineEmits(["click"]);
