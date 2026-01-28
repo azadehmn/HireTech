@@ -2,7 +2,7 @@
   <!-- Loading Overlay -->
   <div v-if="isLoading" class="loading-overlay">
     <div class="loading-overlay__content">
-      <img src="/img/logo.png" alt="zarinPal" class="loading-overlay__logo" />
+      <img src="/img/logo2.png" alt="hiroteck" class="loading-overlay__logo" />
       <div class="loading-overlay__progress">
         <div
           class="loading-overlay__bar loading-overlay__bar--indeterminate"
@@ -11,8 +11,7 @@
     </div>
 
     <div class="loading-overlay__bottom-logo">
-      <img src="/img/logo.png" alt="zarinPal" class="loading-overlay__logo" />
-      <p class="text-xl text-red-200 font-extrabold mr-md">هیروتک</p>
+      <img src="/img/logo.png" alt="hiroteck" class="loading-overlay__logo" />
     </div>
   </div>
   <!-- Main Layout -->

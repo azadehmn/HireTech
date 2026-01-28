@@ -25,7 +25,7 @@
   }
 
   &__bottom-logo {
-    @apply absolute bottom-10 left-1/2 -translate-x-1/2 flex justify-center items-center w-8 h-6;
+    @apply absolute bottom-10 left-1/2 -translate-x-1/2 flex justify-center items-center w-[200] h-[120];
   }
 }
 

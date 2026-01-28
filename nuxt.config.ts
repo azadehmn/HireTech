@@ -10,13 +10,17 @@ const config: NuxtConfig = defineNuxtConfig({
         lang: "fa",
       },
       link: [
-        { rel: "preconnect", href: "https://cdn.zarinpal.com" },
         {
           rel: "preload",
           href: "https://cdn.zarinpal.com/assets/fonts/YekanBakhFaNum.woff2",
           as: "font",
           type: "font/woff2",
           crossorigin: "anonymous",
+        },
+        {
+          rel: "icon",
+          type: "image/png",
+          href: "/favicon.ico",
         },
       ],
       meta: [

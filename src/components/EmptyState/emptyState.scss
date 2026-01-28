@@ -1,0 +1,15 @@
+.root {
+  @apply px-md m-auto text-center max-w-[328px];
+  &__vector {
+    @apply flex justify-center items-center;
+  }
+  &__title {
+    @apply text-body3 font-medium text-body3 font-semibold flex justify-center mt-2xl;
+  }
+  &__description {
+    @apply text-sm  font-semibold flex justify-center mt-sm text-center;
+  }
+  &__action {
+    @apply mt-2xl;
+  }
+}

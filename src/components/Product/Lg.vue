@@ -113,23 +113,31 @@
           </div>
         </template>
       </Card>
+     
+     
+
       <ProductLoading v-if="pending || searchPending" />
+      
+      <!-- <Card v-if="filteredProducts?.length===0" class="my-md w-full col-span-full">
+        <template #header>
+          <EmptyState
+            class="pt-2xl"
+            :description="$t('empty.title')"
+            vector="Product"
+          />
+        </template>
+      </Card> -->
       <!-- Result  from Response Api  -->
-      <!-- <Card
-        v-else
-        v-for="product in data"
-        :key="product.id"
-        :customBg="'rounded-xl'"
-        class="p-3 flex flex-col h-full"
-      > -->
+      <!-- <Card v-for="product in data"> 
       <!-- Result  from filter by localdata -->
       <Card
-        v-else
+      v-else
         v-for="product in filteredProducts"
         :key="product.id"
         :customBg="'rounded-xl'"
       >
         <template #header>
+
           <div>
             <img
               :src="product.image"
@@ -156,18 +164,23 @@
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
-import { reactive, computed, watch, watchEffect } from "vue";
+import { reactive, computed, watchEffect, inject, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { Product } from "../../types/product";
 
 const route = useRoute();
 const router = useRouter();
-const searchTerm = ref("");
-const searchPending = ref(false);
+
+/* ------------------ data ------------------ */
+
 const data = inject<Ref<Product[]>>("data", ref([]));
 const pending = inject<Ref<boolean>>("pending", ref(false));
+
+/* ------------------ search (composable) ------------------ */
+
+const { searchTerm, searchPending, clearSearch } = useSearchQuery(700);
+
+/* ------------------ categories ------------------ */
 
 const selectedCategories = reactive<Record<string, boolean>>({});
 
@@ -183,30 +196,16 @@ const groupedByCategory = computed(() => {
   return Object.values(map);
 });
 
-const filteredProducts = computed(() => {
-  const activeCategories = Object.keys(selectedCategories).filter(
-    (cat) => selectedCategories[cat]
-  );
-
-  let products = (data.value ?? []).filter(
-    (p) =>
-      !activeCategories.length || activeCategories.includes(p.category ?? "--")
-  );
-
-  if (searchTerm.value.trim()) {
-    const term = searchTerm.value.trim().toLowerCase();
-    products = products.filter((p) => p.title.toLowerCase().includes(term));
-  }
-  return products;
-});
+const selectedCategoryNames = computed(() =>
+  Object.keys(selectedCategories).filter((cat) => selectedCategories[cat])
+);
 
 const updateUrl = () => {
-  const activeCategories = Object.keys(selectedCategories).filter(
-    (cat) => selectedCategories[cat]
-  );
+  const activeCategories = selectedCategoryNames.value;
 
   router.push({
     query: {
+      ...route.query,
       categories: activeCategories.length
         ? activeCategories.join(",")
         : undefined,
@@ -214,53 +213,32 @@ const updateUrl = () => {
   });
 };
 
-function useDebounce(fn: Function, delay: number) {
-  let timeout: ReturnType<typeof setTimeout>;
-
-  return (...args: any[]) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => fn(...args), delay);
-  };
-}
-
-const updateSearch = useDebounce(() => {
-  searchPending.value = false;
-  const query: any = { ...route.query };
-  query.search = searchTerm.value || undefined;
-  router.push({ query });
-}, 700);
-const clearSearch = () => {
-  searchTerm.value = "";
-  searchPending.value = false;
-  updateSearch();
-};
-
-const selectedCategoryNames = computed(() => {
-  return Object.keys(selectedCategories)
-    .filter((cat) => selectedCategories[cat])
-    .map((cat) => cat);
-});
-
 const clearCategory = (categoryName: string) => {
   selectedCategories[categoryName] = false;
   updateUrl();
 };
 
-/* ------------------ state → URL ------------------ */
+/* ------------------ filters ------------------ */
 
-watch(searchTerm, () => {
-  searchPending.value = true;
-  updateSearch();
+const filteredProducts = computed(() => {
+  let products = data.value ?? [];
+
+  if (selectedCategoryNames.value.length) {
+    products = products.filter((p) =>
+      selectedCategoryNames.value.includes(p.category ?? "--")
+    );
+  }
+
+  if (searchTerm.value.trim()) {
+    const term = searchTerm.value.toLowerCase();
+    products = products.filter((p) => p.title.toLowerCase().includes(term));
+  }
+
+  return products;
 });
-watch(
-  () => route.query.search,
-  (search) => {
-    searchTerm.value = typeof search === "string" ? search : "";
-  },
-  { immediate: true }
-);
 
-// categories
+/* ------------------ URL → categories ------------------ */
+
 watchEffect(() => {
   const fromUrl = route.query.categories?.toString().split(",") ?? [];
 
